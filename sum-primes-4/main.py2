@@ -1,0 +1,20 @@
+import sys
+
+def isprime(number):
+    for i in xrange(2, number):
+        if number % i == 0:
+            return False
+    else:
+        return True
+
+def gen_primes(max_n):
+    primes_spawned = 0
+    i = 2
+    while primes_spawned < max_n:
+        if isprime(i):
+            primes_spawned += 1
+            yield i
+        i += 1
+if __name__ == "__main__":
+    answer = sum(gen_primes(1000))
+    sys.stdout.write(str(answer))
