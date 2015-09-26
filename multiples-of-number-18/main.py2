@@ -7,7 +7,7 @@ def multiple(testnum, mnum):
     cached = mnum
 
     while cached < testnum:
-        cached *= 2     
+        cached += mnum     
 
     return cached
 
