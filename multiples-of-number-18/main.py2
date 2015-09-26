@@ -1,0 +1,22 @@
+import sys
+
+
+def multiple(testnum, mnum):
+    """Return a multiple of mnum that is greater or equal to testnum"""
+
+    cached = mnum
+
+    while cached < testnum:
+        cached *= 2     
+
+    return cached
+
+
+if __name__ == "__main__":
+
+    test_cases = open(sys.argv[1], 'r')
+
+    for test in test_cases:
+        args = [int(arg) for arg in test.split(',')]
+        answer = multiple(*args)
+        sys.stdout.write(str(answer) + '\n')
