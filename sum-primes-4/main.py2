@@ -15,6 +15,9 @@ def gen_primes(max_n):
             primes_spawned += 1
             yield i
         i += 1
+
+
 if __name__ == "__main__":
-    answer = sum(gen_primes(1000))
-    sys.stdout.write(str(answer))
+    primes1000 = gen_primes(1000)
+    prime_sum = sum(primes1000)
+    sys.stdout.write(str(prime_sum))
