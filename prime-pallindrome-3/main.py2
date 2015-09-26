@@ -1,0 +1,28 @@
+import sys
+
+def isprime(number):
+    for i in xrange(2, number):
+        if number % i == 0:
+            return False
+    else:
+        return True
+
+def ispallindrome(string):
+    length = len(string)
+    p1 = 0  # Beginning pointer
+    p2 = length - 1  # End pointer
+
+    while p1 < p2:
+        if string[p1] != string[p2]:
+            return False
+        p1 += 1
+        p2 -= 1
+
+    return True
+
+if __name__ == "__main__":
+    maximum = None
+    for i in range(1, 1000):
+        if isprime(i) and ispallindrome(str(i)):
+            maximum = i
+    sys.stdout.write(str(maximum))
