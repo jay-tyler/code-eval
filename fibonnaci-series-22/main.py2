@@ -1,0 +1,25 @@
+import sys
+
+
+def fibonacci(nth):
+    """Return value of fibonacci series at the nth digit"""
+
+    if nth == 0:
+        return 0
+    if nth == 1:
+        return 1 
+    
+    two_before, one_before = 0, 1
+    for i in range(2, nth + 1):
+        current = two_before + one_before
+        two_before, one_before = one_before, current
+
+    return current
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        nth = int(test)
+        answer = fibonacci(nth)
+        print answer
