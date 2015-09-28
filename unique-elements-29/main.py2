@@ -1,0 +1,9 @@
+import sys
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+
+    for test in test_cases:
+        args = test.split(',')
+        unique = {int(arg) for arg in args}
+        print str(unique)[5: -2].replace(" ", "")
