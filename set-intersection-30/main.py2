@@ -1,0 +1,12 @@
+import sys
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        args = test.split(';')
+        set1 = {int(arg) for arg in args[0].split(',')}
+        set2 = {int(arg) for arg in args[1].split(',')}
+        intersection = set1 & set2
+        as_string = str(intersection)[5: -2].replace(" ", "")
+        sys.stdout.write("{}\n".format(as_string))
