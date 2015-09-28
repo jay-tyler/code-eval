@@ -6,4 +6,6 @@ if __name__ == "__main__":
     for test in test_cases:
         args = test.split(',')
         unique = {int(arg) for arg in args}
-        print str(unique)[5: -2].replace(" ", "")
+        unique = list(unique)
+        unique.sort()
+        print str(unique)[1: -1].replace(" ", "")
