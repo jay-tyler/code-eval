@@ -1,0 +1,16 @@
+import sys
+
+def print_row(n1, n2):
+    """Print a multiplication table starting at n1 with numbers to n2"""
+
+    sys.stdout.write('{:>4d}'.format(n1).lstrip())
+    for i in xrange(2, n2):
+        sys.stdout.write('{:>4d}'.format(n1 * i))
+    sys.stdout.write('{:4d}'.format(n1 * n2).rstrip())
+    sys.stdout.write('\n')
+
+
+if __name__ == "__main__":
+    for i in xrange(1, 13):
+        print_row(i, 12)
+
