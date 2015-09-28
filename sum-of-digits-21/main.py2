@@ -1,0 +1,26 @@
+import sys
+
+
+def nth_digit(num, nth):
+    """Return value at nth digit of num; indexing starts at 0""" 
+    return (num % 10 ** (nth + 1) - num % 10 ** nth) // 10 ** nth
+
+
+def sum_digits(num):
+    nth = 0
+    sum = 0
+
+    while num % 10 ** nth != num:
+        sum += nth_digit(num, nth)
+        nth += 1
+
+    return sum
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        num = int(test)
+        answer = sum_digits(num)
+        print answer 
+ 

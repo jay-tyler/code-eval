@@ -1,0 +1,20 @@
+import sys
+
+
+def compare_bits(num, pos_1, pos_2):
+    """Return whether bit at pos_1 equals bit at pos_2
+
+    num is assumed to be a natural number in integer representation
+    """
+
+    binary = bin(num)[::-1]
+    return binary[pos_1 - 1] == binary[pos_2 - 1] 
+
+
+if __name__ == "__main__":
+   test_cases = open(sys.argv[1], 'r')
+
+   for test in test_cases:
+       args = [int(arg) for arg in test.split(',')]
+       answer = str(compare_bits(*args))
+       print answer.lower()
