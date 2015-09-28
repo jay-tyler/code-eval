@@ -1,0 +1,10 @@
+import sys
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+
+    sum = 0
+    for test in test_cases:
+        sum += int(test)
+    sys.stdout.write('{}\n'.format(sum))

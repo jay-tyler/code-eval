@@ -1,0 +1,8 @@
+import sys
+
+
+if __name__ == "__main__":
+    for num in xrange(1, 100):
+        if num % 2 != 0:
+             print num
+
