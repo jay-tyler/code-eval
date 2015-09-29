@@ -1,5 +1,4 @@
 import sys
-import multiprocessing as mp
 
 
 def nth_digit(num, nth):
@@ -23,32 +22,12 @@ def is_happy(num):
         if num == 1:
             return 1 
         num = sum_square_digits(num)
-    
-    # Pointers for Loops
-    num1, num2 = sum_square_digits(num), num
-    results2 = mp.Queue()
+    return 0    
 
-    # Start loop1 first, check lagging loop2 results against and see if match
-    loop1 = mp.Process(target=loop1, args=num1)
-    loop2 = mp.Process
-
-
-def loop1():
-    # Loop 1
-    while True:
-         if num1 == 1:
-              return 1
-         if num1 == num2:
-              return 0
-
-
-def loop2():
-    pass
 
 if __name__ == "__main__":
     test_cases = open(sys.argv[1], 'r')
     for test in test_cases:
         num = int(test)
         print is_happy(num)
-        
         
