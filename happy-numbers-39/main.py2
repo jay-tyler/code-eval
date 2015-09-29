@@ -17,12 +17,17 @@ def sum_square_digits(num):
 
 
 def is_happy(num):
+    """Return if number is 'happy'; 1 for True, 0 False
+    
+    Number is happy if sum of square of digits or recursive sum of square of
+    digits is equal to one"""
+
+    cached = num
     for _ in xrange(100):
-        """March through before checking for loops"""
-        if num == 1:
+        if cached == 1:
             return 1 
-        num = sum_square_digits(num)
-    return 0    
+        cached = sum_square_digits(cached)
+    return 0
 
 
 if __name__ == "__main__":
