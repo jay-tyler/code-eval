@@ -1,0 +1,44 @@
+import sys
+from collections import Counter
+
+
+def nth_index(num_asstr, nth):
+    """Return int value at nth index of num_asstr; indexing starts at 0
+
+    If index does not exist, returns -1""" 
+
+    try:
+        return int(num_asstr[nth])
+    except IndexError:
+        return -1
+
+def is_selfdescribing(num):
+    """Return int 1 or 0 depending if str num is self-describing.
+
+    A self describing number will have as many 0's as in the zero index digit,
+    as many 1's as are in the one index digit etc.
+
+    For example:
+    >>> is_selfdescribing(2020)
+    1
+    >>> is_selfdescribing(22)
+    0
+    >>> is_selfdescribing(1210)
+    1
+    """
+    num_asstr = str(num)
+    counts = Counter(num_asstr)
+
+    for subnum, count in counts.iteritems():
+        subnum = int(subnum)
+        expected_count = nth_index(num_asstr, subnum)
+        if count != expected_count:
+            return 0
+    return 1
+    
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        arg = int(test.strip())
+        print is_selfdescribing(arg) 
+        
