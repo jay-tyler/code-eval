@@ -12,6 +12,7 @@ def nth_index(num_asstr, nth):
     except IndexError:
         return -1
 
+
 def is_selfdescribing(num):
     """Return int 1 or 0 depending if str num is self-describing.
 
@@ -36,6 +37,7 @@ def is_selfdescribing(num):
             return 0
     return 1
     
+
 if __name__ == "__main__":
     test_cases = open(sys.argv[1], 'r')
     for test in test_cases:
