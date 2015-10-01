@@ -1,8 +1,17 @@
 import sys
 
+
+lowercase = set('abcdefghijklmnopqrstuvwxyz')
+
+def capitalize_first(string):
+    """Return string with first letter capitalized, ignoring all other case"""
+    if string[0] in lowercase:
+        return string[0].upper() + string[1:] 
+    return string
+
+
 if __name__ == "__main__":
     test_cases = open(sys.argv[1], 'r')
     for test in test_cases:
-        args = [arg.capitalize() for arg in test.split()]
+        args = [capitalize_first(arg) for arg in test.split()]
         print ' '.join(args)
-        
