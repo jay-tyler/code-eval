@@ -1,0 +1,21 @@
+import sys
+from collections import Counter
+
+
+def get_beauty(string):
+    counts = Counter(string.lower())
+    sum = 0
+    found = 0
+
+    for record in counts.most_common():
+        if record[0].isalpha():
+            sum += record[1] * (26 - found)
+            found += 1
+    
+    return sum
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        print get_beauty(test)
