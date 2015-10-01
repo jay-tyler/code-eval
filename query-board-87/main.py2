@@ -1,0 +1,55 @@
+import sys
+
+
+class Board():
+    def __init__(self, n=256):
+        self.board = []
+        self.n = n
+        for i in range(n):
+            row = []
+            for j in range(n):
+                row.append(0)
+            self.board.append(row)
+
+    def set_row(self, row, val):
+        """Set all entries in row to val"""
+        self.board[row] = [val for _ in xrange(self.n)]
+
+    def set_column(self, column, val):
+        """Set all entries in column to val"""
+        for row in xrange(self.n):
+            self.board[row][column] = val 
+
+    def query_row(self, row):
+        """Return sum of all elements across a row"""
+        return sum(self.board[row])
+
+    def query_column(self, column):
+        """Return sum of all elements down a column"""
+        sum = 0
+        for row in xrange(self.n):
+            sum += self.board[row][column]
+        return sum
+
+    def parse(self, string):
+        """Parse string according to CodeEval spec"""
+        operations = {
+            "SetRow": "set_row",
+            "SetCol": "set_column",
+            "QueryRow": "query_row",
+            "QueryCol": "query_column" 
+        }
+        
+        args = string.split()
+        args[1:] = map(int, args[1:])  # args[1:] should be int
+        result = getattr(self, operations[args[0]])(*args[1:])
+        if result is not None:
+            print result
+
+
+if __name__ == "__main__":
+    board = Board()
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        board.parse(test)
+
