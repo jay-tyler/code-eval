@@ -1,0 +1,19 @@
+import sys
+
+
+def _mod(num, divisor):
+    """Return mod from num mod divisor"""
+    i = 0
+
+    while num - (i + 1) * divisor >= 0:
+        i += 1
+
+    return num - i * divisor
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        args = [int(arg) for arg in test.split(',')]
+        print _mod(*args)
+
