@@ -1,0 +1,31 @@
+import sys
+
+
+def nth_digit(num, nth):
+    """Return value at nth digit of num; indexing starts at 0""" 
+    return (num % 10 ** (nth + 1) - num % 10 ** nth) // 10 ** nth
+
+
+def sum_power_digits(num):
+    """Return the sum of the nth power corresponding to len of digits"""
+    nth = 0
+    cache = []
+    while num % 10 ** nth != num:
+        cache.append(nth_digit(num, nth))
+        nth += 1
+    cache = map(lambda x: x ** nth, cache)
+    return sum(cache)
+
+
+def is_armstrong(num):
+    """Returns if number is an armstrong number"""
+    return num == sum_power_digits(num)
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        num = int(test)
+        answer = is_armstrong(num)
+        print answer 
+ 

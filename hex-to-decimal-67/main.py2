@@ -1,0 +1,13 @@
+import sys
+
+
+def hex_to_decimal(hexstr):
+    """From hexstr, return int in base 10"""
+    return int(hexstr, 16)
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+       print hex_to_decimal(test)
+
