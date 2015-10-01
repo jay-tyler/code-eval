@@ -1,0 +1,17 @@
+import sys
+
+
+def print_floats(listin):
+    formatter = "04.3f"
+    for item in listin[:-1]:
+        sys.stdout.write("{item:{formatter}} ".format(item=item, formatter=formatter))
+    sys.stdout.write("{item:{formatter}}\n".format(item=listin[-1], formatter=formatter))
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        args = [float(arg) for arg in test.split()]
+        args.sort()
+        print_floats(args)
+
