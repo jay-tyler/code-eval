@@ -5,9 +5,9 @@ class Board():
     def __init__(self, n=256):
         self.board = []
         self.n = n
-        for i in range(n):
+        for i in xrange(n):
             row = []
-            for j in range(n):
+            for j in xrrange(n):
                 row.append(0)
             self.board.append(row)
 
