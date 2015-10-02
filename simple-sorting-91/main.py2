@@ -14,4 +14,5 @@ if __name__ == "__main__":
         args = [float(arg) for arg in test.split()]
         args.sort()
         print_floats(args)
+    test_cases.close()
 

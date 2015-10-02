@@ -8,3 +8,4 @@ if __name__ == "__main__":
     for test in test_cases:
         sum += int(test)
     sys.stdout.write('{}\n'.format(sum))
+    test_cases.close()

@@ -23,3 +23,4 @@ if __name__ == "__main__":
         nth = int(test)
         answer = fibonacci(nth)
         print answer
+    test_cases.close()

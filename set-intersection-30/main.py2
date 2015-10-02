@@ -10,3 +10,4 @@ if __name__ == "__main__":
         intersection = set1 & set2
         as_string = str(intersection)[5: -2].replace(" ", "")
         sys.stdout.write("{}\n".format(as_string))
+    test_cases.close()

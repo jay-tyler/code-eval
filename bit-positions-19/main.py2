@@ -18,3 +18,4 @@ if __name__ == "__main__":
        args = [int(arg) for arg in test.split(',')]
        answer = str(compare_bits(*args))
        print answer.lower()
+   test_cases.close()

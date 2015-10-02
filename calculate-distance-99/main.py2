@@ -1,0 +1,9 @@
+import sys
+
+
+def parse(string):
+    """Return a tuple of points from a string of format '(x1, y1) (x2, y2)'"""
+    # TODO: Recently saw a method to forgo this clumsy rebinding pattern; what was it?
+    args = string.split(") (")
+    args = args.replace(")", "")
+    args =

@@ -27,5 +27,6 @@ if __name__ == "__main__":
     for test in test_cases:
         num = int(test)
         answer = is_armstrong(num)
-        print answer 
+        print answer
+    test_cases.close()
  

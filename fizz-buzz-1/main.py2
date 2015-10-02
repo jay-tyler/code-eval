@@ -24,4 +24,5 @@ if __name__ == "__main__":
         test_args = [int(arg) for arg in test.split()]
         answer = fizz_buzz_round(*test_args)
         sys.stdout.write(' '.join(answer) + '\n')
+    test_cases.close()
          

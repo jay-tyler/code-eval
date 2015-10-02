@@ -16,4 +16,5 @@ if __name__ == "__main__":
     for test in test_cases:
         args = [int(arg) for arg in test.split(',')]
         print _mod(*args)
+    test_cases.close()
 

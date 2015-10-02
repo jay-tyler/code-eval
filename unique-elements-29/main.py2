@@ -9,3 +9,4 @@ if __name__ == "__main__":
         unique = list(unique)
         unique.sort()
         print str(unique)[1: -1].replace(" ", "")
+    test_cases.close()

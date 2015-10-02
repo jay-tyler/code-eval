@@ -15,3 +15,4 @@ if __name__ == "__main__":
     for test in test_cases:
         args = [capitalize_first(arg) for arg in test.split()]
         print ' '.join(args)
+    test_cases.close()

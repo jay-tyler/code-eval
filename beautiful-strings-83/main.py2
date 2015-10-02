@@ -19,3 +19,4 @@ if __name__ == "__main__":
     test_cases = open(sys.argv[1], 'r')
     for test in test_cases:
         print get_beauty(test)
+    test_cases.close()
