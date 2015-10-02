@@ -4,6 +4,12 @@ import sys
 def parse(string):
     """Return a tuple of points from a string of format '(x1, y1) (x2, y2)'"""
     # TODO: Recently saw a method to forgo this clumsy rebinding pattern; what was it?
-    args = string.split(") (")
-    args = args.replace(")", "")
-    args =
+    args = [arg.replace(")", "").replace("(", "") for arg in string.split(") (")] 
+    print args
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        parse(test) 
+
+    test_cases.close()
