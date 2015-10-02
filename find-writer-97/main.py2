@@ -1,18 +1,10 @@
 import sys
 
-
-class Parser():
-    def __init__(self, string):
-        self.psuedo_encrypted, self.indices = self.parse(string)        
-
-    def parse(self, string):
+def parse(string):
         string_jumble, numbers = string.split('|')
         numbers = [int(arg) for arg in numbers.split()]
-        return string_jumble, numbers
-
-    def _print(self):
-        for index in self.indices:
-            sys.stdout.write(self.psuedo_encrypted[index - 1])
+        for index in numbers:
+            sys.stdout.write(string_jumble[index - 1])
         sys.stdout.write('\n')
 
         
@@ -20,5 +12,4 @@ if __name__ == "__main__":
     lines = open(sys.argv[1], 'r')
     for line in lines:
         if not line.isspace():
-            parser = Parser(line)
-            parser._print()
+            parse(line)
