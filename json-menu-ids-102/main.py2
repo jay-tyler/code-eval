@@ -1,0 +1,23 @@
+import sys
+import json
+
+
+def add_labeled_menu_items(menudict):
+    """Takes a structured menudict and returns the sum of all labeled menu items"""
+    sum = 0
+    for item in menudict['menu']['items']:
+        try:
+            if item.has_key('label'):
+                 sum += item['id']
+        except AttributeError:
+            pass
+    return sum        
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        if not test.isspace():
+            arg = json.loads(test)
+            print add_labeled_menu_items(arg)
+
