@@ -1,15 +1,22 @@
 import sys
+import heapq
 
+def lowest_unique_number(list):
+    """Return lowest unique number from list
+    
+    This function utilizes mutable aliasing; i.e. it will mutate the incoming list"""
 
-def is_even(integer):
-    """Return 1 if number is even, 0 if not"""
-    return integer % 2 == 0
+    heapq.heapify(list)
+    two_hand = heapq.nsmallest(2, list)
 
+    if two_hand[0] == two_hand[1]:
+        return 0
+    else:
+        return two_hand[0]
+    
 
 if __name__ == "__main__":
     test_cases = open(sys.argv[1], 'r')
     for test in test_cases:
-        arg = int(test)
-        answer = is_even(arg)
-        print int(answer)
-
+        args = [int(arg) for arg in test.split()] 
+        print lowest_unique_number(args)
