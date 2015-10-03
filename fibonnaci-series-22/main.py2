@@ -10,7 +10,7 @@ def fibonacci(nth):
         return 1 
     
     two_before, one_before = 0, 1
-    for i in range(2, nth + 1):
+    for i in xrange(2, nth + 1):
         current = two_before + one_before
         two_before, one_before = one_before, current
 
