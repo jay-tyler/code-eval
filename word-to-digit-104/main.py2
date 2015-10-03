@@ -1,0 +1,30 @@
+import sys
+
+
+words_digits = {
+    "zero": '0',
+    "one": '1',
+    "two": '2',
+    "three": '3',
+    "four": '4', 
+    "five": '5',
+    "six": '6',
+    "seven": '7',
+    "eight": '8',
+    "nine": '9'
+}
+
+
+def parse_to_string(listin):
+    """Takes a list of value-based strings and returns a string representation of the int"""
+    new_str = ''
+    for item in listin:
+        new_str = new_str + words_digits[item]
+    return new_str
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        args = [arg.strip() for arg in test.split(';')]
+        print parse_to_string(args)
