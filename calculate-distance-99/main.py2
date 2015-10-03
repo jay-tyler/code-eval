@@ -1,15 +1,23 @@
 import sys
-
+import re
 
 def parse(string):
     """Return a tuple of points from a string of format '(x1, y1) (x2, y2)'"""
-    # TODO: Recently saw a method to forgo this clumsy rebinding pattern; what was it?
-    args = [arg.replace(")", "").replace("(", "") for arg in string.split(") (")] 
-    print args
+    matches = re.finditer("[-0-9]+", string)
+    args = [int(arg.group()) for arg in matches]
+    return args
+
+def pt_distance(list):
+    """Return distance between points x1, y1, x2, y2 contained in list/tuple"""
+    x_dist = list[0] - list[2]
+    y_dist = list[1] - list[3]
+
+    return (x_dist ** 2 + y_dist ** 2) ** 0.5
 
 if __name__ == "__main__":
     test_cases = open(sys.argv[1], 'r')
     for test in test_cases:
-        parse(test) 
+        answer = pt_distance(parse(test))
+        print "{:.0f}".format(answer)
 
     test_cases.close()
