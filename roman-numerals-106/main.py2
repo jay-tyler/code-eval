@@ -1,0 +1,73 @@
+import sys
+from collections import OrderedDict
+
+
+roman_numerals = OrderedDict([(1000, "M"), (500, "D"), (100, "C"), (50, "L"),
+                              (10, "X"), (5, "V"), (1, "I")])
+
+
+def most_significant_digit(num, nth=0):
+    """Return value at nth digit of num; indexing starts at 0"""
+    nth = 0
+    while True:
+        multiple = num // (10 ** nth)
+        if multiple == 0:
+            nth -= 1  # The index has advanced one too far 
+            break
+        else:
+            nth += 1
+    return (num % 10 ** (nth + 1) - num % 10 ** nth) // 10 ** nth
+
+
+def should_refactor(numeral_num, num, multiple, remainder):
+    """Determine if Roman numeral refactor is in order
+
+    e.g. 4 represented as IV
+         9 as IX
+         40 as XL
+
+    i.e. if the roman numeral represents a multiple of 5 in the most signicant
+         digit, a remainder of 4 in the most signficant digit is refactored
+         
+         likewise if the numeral represents a multiple of 1 in the most
+         significant digit, a remainder of 9 in the second-most significant
+         digit is refactored"""
+
+    big_digit = most_significant_digit(num)
+    print "big_digit = {}, remainder = {}".format(big_digit, remainder)
+    if big_digit == 5:
+        return True if remainder == 4 else False
+
+    if big_digit == 1:
+        return True if remainder == 9 else False
+
+    return False
+ 
+def romanize(num):
+    """Return a roman numeral for num
+
+    I, V, X, L, C, D, M = 1, 5, 10, 50, 100, 500, 1000
+    4 and 9 digits represented by difference, e.g. 9 as IX or 40 as XL"""
+
+    roman_repr = ""
+    numerals = roman_numerals.iteritems()
+
+    for arabic, roman in numerals:
+        multiple, remainder = divmod(num, arabic)
+        roman_repr = roman_repr + roman * multiple
+        print "REFACTOR? {}".format(should_refactor(arabic, num, multiple, remainder))
+        if should_refactor(arabic, num, multiple, remainder):  # 
+            arabic2, roman2 = next(numerals)
+            print "REFACTOR: arabic = {}, remainder = {}".format(arabic, remainder)
+        num = remainder
+
+    return roman_repr
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        arg = int(test)
+        answer = romanize(arg)
+        print answer
+
