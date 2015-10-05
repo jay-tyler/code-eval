@@ -17,6 +17,10 @@ def romanize(num):
                 if num // 900:
                     to_return = to_return + "CM"
                     num -= 900
+            elif numeral == "D":
+                if num // 400:
+                    to_return = to_return + "CD"
+                    num -= 400
             elif numeral == "C":
                 if num // 90:
                     to_return = to_return + "XC"
