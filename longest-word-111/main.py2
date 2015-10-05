@@ -1,0 +1,21 @@
+import sys
+
+
+def longest_word(string):
+    """Return the longest white-space separated word from a string
+
+    If multiple words of equal max length: will return the first occurring longest word.
+    """
+    words = string.split()
+    max = (0, "")
+    for word in words:
+        if len(word) > max[0]:
+            max = len(word), word
+    return max[1]
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        print longest_word(test)
+
