@@ -1,13 +1,11 @@
 import sys
-from collections import OrderedDict
 
-
-roman_numerals = OrderedDict([(1000, "M"), (500, "D"), (100, "C"), (50, "L"),
-                              (10, "X"), (5, "V"), (1, "I")])
+roman_numerals = [(1000, "M"), (500, "D"), (100, "C"), (50, "L"),
+                              (10, "X"), (5, "V"), (1, "I")]
 
 
 def romanize(num):
-    numeral_generator = roman_numerals.iteritems()
+    numeral_generator = iter(roman_numerals)
     divisor, numeral = next(numeral_generator)
     to_return = ""
     while True:
@@ -46,4 +44,3 @@ if __name__ == "__main__":
         arg = int(test)
         answer = romanize(arg)
         print answer
-
