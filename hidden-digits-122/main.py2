@@ -1,0 +1,20 @@
+import sys
+
+
+def filter(string):
+    """Return letters a through j as string representations of 0-9"""
+    out = ""
+    for letter in string:
+        code_pt = ord(letter)
+        if 97 <= code_pt < 107:
+            out = out + str(code_pt - 97)
+        elif letter.isdigit():
+            out = out + letter
+    return out or "NONE"
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        print filter(test)
+
