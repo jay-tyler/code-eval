@@ -1,0 +1,16 @@
+import sys
+
+
+def multiply(list1, list2):
+    """Return element-wise multiplication list from list1 * list2"""
+    return [elem1 * elem2 for elem1, elem2 in zip(list1, list2)]
+
+if  __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        args = test.split('|')
+        list1 = [int(arg) for arg in args[0].split()]
+        list2 = [int(arg) for arg in args[1].split()]
+        answer =  multiply(list1, list2)
+        print ' '.join([str(element) for element in answer])
+
