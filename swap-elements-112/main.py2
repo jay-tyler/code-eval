@@ -1,0 +1,19 @@
+import sys
+from copy import copy
+
+def list_swap(listin, swap):
+    indices = [int(index) for index in swap.split('-')]
+    listout = copy(listin)
+    listout[indices[0]], listout[indices[1]] = listout[indices[1]], listout[indices[0]]
+    return listout
+
+if  __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        args = test.split(':')
+        testlist = args[0].split()
+        swaps = [arg.strip() for arg in args[1].split(',')]
+        for swap in swaps:
+            testlist = list_swap(testlist, swap)
+        print ' '.join(testlist)
+
