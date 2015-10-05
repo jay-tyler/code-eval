@@ -1,0 +1,26 @@
+import sys
+
+
+def parse(inlist):
+    has_words = False
+    words = []
+    nums = [] 
+    for thing in inlist:
+        try:
+            int(thing)
+            nums.append(thing)
+        except ValueError:
+            has_words = True
+            words.append(thing)
+    has_nums = bool(nums)
+    if has_words and has_nums:
+        return ','.join(words) + '|' + ','.join(nums)
+    else:
+        return ','.join(inlist)
+
+
+if  __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        args = [arg.strip() for arg in test.split(',')]
+        print parse(args)
