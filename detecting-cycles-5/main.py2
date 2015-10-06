@@ -1,0 +1,36 @@
+import sys
+
+
+def is_cycle(inlist, i, length):
+    """Return whether list inlist is a cycle given an index for the cycle start and a putative cycle length"""
+    index = i
+    while True:
+        try:
+            if inlist[index] != inlist[index + length]:
+                return False
+            index += 1
+        except IndexError:
+            break
+    return True
+
+
+def find_repetition(inlist):
+    """Return cycle slice given a list that contains a cycle"""
+    for length in xrange(1, len(inlist) // 2 + 1):  # There must be >= 2 cycles
+        for i, element in enumerate(inlist):
+            try:
+                if element == inlist[i + length]:
+                    if is_cycle(inlist, i, length):
+                        return inlist[i : length + i] 
+            except IndexError:
+                pass 
+    raise ValueError("Must provide a list with a cycle")
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        args = [int(arg) for arg in test.split()]
+        answer =  find_repetition(test.split()) 
+        print ' '.join(answer)
+
