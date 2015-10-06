@@ -1,0 +1,16 @@
+import sys
+from heapq import heappop, heappush
+
+
+heap = []
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    n_largest = int(test_cases.readline())
+    for test in test_cases:
+        heappush(heap, (sys.maxint - len(test), test))  # heapq utilizes a min heap
+    for record in xrange(n_largest):
+        sentence = heappop(heap)[1]
+        sys.stdout.write(sentence)
+

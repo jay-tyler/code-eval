@@ -1,0 +1,20 @@
+import sys
+
+STACK = []
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        incoming = [arg.strip() for arg in test.split()]
+        for element in incoming:
+            STACK.append(element)
+        to_print = []
+        while STACK:
+            try:
+                to_print.append(STACK.pop()) 
+                STACK.pop()
+            except IndexError:
+                break
+        print ' '.join(to_print) 
+
