@@ -1,0 +1,12 @@
+import sys
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        args = [arg.strip() for arg in test.split()]
+        nth_to_last = -1 * int(args.pop())
+        try:
+            print args[nth_to_last]
+        except IndexError:
+            pass

@@ -1,10 +1,9 @@
 import sys
-
+import re
 
 def parse_to_ordered_distance_list(strin):
-    strings = [arg.strip() for arg in strin.split(';')][:-1]
-    distance_strings = [string.split(',')[1] for string in strings]
-    distances = [int(arg) for arg in distance_strings]
+    distances = re.findall(r"[0-9]+", strin)
+    distances = map(int, distances)
     distances.sort()
     distances = get_relative_distances(distances)
     return distances
