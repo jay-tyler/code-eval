@@ -1,0 +1,34 @@
+import sys
+
+
+def parse_to_ordered_distance_list(strin):
+    strings = [arg.strip() for arg in strin.split(';')][:-1]
+    distance_strings = [string.split(',')[1] for string in strings]
+    distances = [int(arg) for arg in distance_strings]
+    distances.sort()
+    distances = get_relative_distances(distances)
+    return distances
+
+
+def get_relative_distances(listin):
+    prev = 0
+    return_list = []
+    for item in listin:
+        return_list.append(item - prev)
+        prev = item
+    return return_list
+
+    
+def print_list(list):
+    items = iter(list)
+    sys.stdout.write("{}".format(next(items)))
+    for item in items:
+        sys.stdout.write(',{}'.format(item))
+    sys.stdout.write('\n')
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        answer = parse_to_ordered_distance_list(test)
+        print_list(answer)
