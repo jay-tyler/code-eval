@@ -1,0 +1,28 @@
+import sys
+
+
+def parse_numbers(listin):
+    current = listin[0]
+    count = 0
+    out = []
+
+    for number in listin:
+        if number != current:
+            out.append(count)
+            out.append(current)
+            count = 0
+            current = number
+        count += 1
+    out.append(count)
+    out.append(current)
+    return out
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for case in test_cases:
+        arg_list = [int(arg) for arg in case.split()]
+        answer = parse_numbers(arg_list)
+        print ' '.join(map(str, answer))
+        
+
