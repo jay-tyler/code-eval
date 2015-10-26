@@ -1,0 +1,23 @@
+import sys
+import re
+
+
+def operate(numstr, operstr):
+    operators = re.findall(r"\w+|\W", operstr)
+    len1, len2 = len(operators[0]), len(operators[2])
+    assert len1 + len2 == len(numstr)
+    if operators[1] == '-':
+        return int(numstr[:len1]) - int(numstr[len1:])
+    elif operators[1] == '+':
+        return int(numstr[:len1]) + int(numstr[len1:])
+    else:
+        raise ValueError("Operator required: + or -")
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for case in test_cases:
+        args = case.split()
+        answer = operate(*args)
+        print answer
+
