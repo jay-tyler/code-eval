@@ -1,0 +1,27 @@
+import sys
+
+
+prev_index = None
+
+
+def get_index(stringin):
+    if "C" in stringin:
+        return stringin.index("C")
+    elif "_" in stringin:
+        return stringin.index("_")
+    else:
+        raise ValueError("string input must contain checkpoint or gate")
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for case in test_cases:
+        index = get_index(case)
+        turn = index - prev_index
+        if turn < 0:
+            print case[:index] + r"/" + case[index + 1:]
+        elif turn > 0:
+            print case[:index] + r"\" + case[index + 1:]
+        else:
+            print case[:index] + r"|" + case[index + 1:]       
+
