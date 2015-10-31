@@ -17,11 +17,14 @@ if __name__ == "__main__":
     test_cases = open(sys.argv[1], 'r')
     for case in test_cases:
         index = get_index(case)
-        turn = index - prev_index
+        turn = index - prev_index if prev_index else 0
+        frag1 = case[:index]
+        frag2 = case[index + 1:]
         if turn < 0:
-            print case[:index] + r"/" + case[index + 1:]
+            sys.stdout.write(r"{}/{}".format(frag1, frag2))
         elif turn > 0:
-            print case[:index] + r"\" + case[index + 1:]
+            sys.stdout.write(r"{}\{}".format(frag1, frag2))
         else:
-            print case[:index] + r"|" + case[index + 1:]       
+            sys.stdout.write(r"{}|{}".format(frag1, frag2))
+        prev_index = index
 
