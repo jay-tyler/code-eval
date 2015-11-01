@@ -1,0 +1,69 @@
+import sys
+import calendar
+import datetime
+
+
+def datetime_range(strin):
+    """Return a tuple of datetimes from strin.
+    
+    Expected strin formatting is e.g. "Jan 2010-Dec 2010"
+    
+    Tuple of datetimes returned. Start is first day of month, End is last day.
+    """
+
+    date_strs = strin.split("-")
+    start = datetime.datetime.strptime(date_strs[0], "%b %Y")
+    end = datetime.datetime.strptime(date_strs[1], "%b %Y")
+
+    # Adjust for end of month
+    mo_days = calendar.monthrange(end.year, end.month)[1] - 1
+    end = end + datetime.timedelta(days=mo_days)
+    
+    return start, end
+
+
+def calculate_years(ranges):
+    def attempt_combine(range1, range2):
+        """See if range2 is at all contained in range1. Return a truncated range if so."""
+
+        if range1[0] > range2[0]:
+            # Want range1 to always be earlier starting
+            range1, range2 = range1, range2
+        if range1[1] > range2[1]:
+            # Case of range2-end being inside range1; full overlap
+            return range1,
+        elif range1[1] > range2[0]:
+            # Case of range2-start being inside range1; partial overlap
+            return range1, (range1[1], range2[1])
+        else:
+            return range1, range2
+
+    cached = []
+    j = 0
+    def combine_jth_range(j):
+        for i in xrange(j, len(ranges)):
+            try:
+                range1 = ranges[j]
+                range2 = ranges[i + 1]
+            except IndexError:
+                pass
+            else:
+                cached.extend(attempt_combine(range1, range2))
+    for j in xrange(len(ranges)): # TODO: Fix. We need to tear down ranges and replace with truncated ranges. Aslo return a reference to last pointer
+        try:
+            combine_jth_range(j)
+            ranges = cached
+            cached = []
+        except IndexError:
+            break
+    return ranges 
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+
+    for case in test_cases:
+        case = case.rstrip()
+        args = case.split("; ")
+        ranges = [datetime_range(arg) for arg in args]
+        print calculate_years(ranges)
+    test_cases.close()
