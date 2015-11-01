@@ -49,7 +49,9 @@ def calculate_years(ranges):
                 pass
             else:
                 cached.extend(attempt_combine(range1, range2))
-    for j in xrange(len(ranges)): # TODO: Fix. We need to tear down ranges and replace with truncated ranges. Aslo return a reference to last pointer
+    for j in xrange(len(ranges)):
+    # TODO: Fix. We need to tear down ranges and replace with truncated ranges. Aslo return a reference to last pointer
+    # or TODO: Maybe I should be sorting all ranges first. That might make things more straight forward.
         try:
             combine_jth_range(j)
             ranges = cached
