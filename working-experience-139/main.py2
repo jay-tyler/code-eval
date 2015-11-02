@@ -27,7 +27,7 @@ def datetime_range(strin):
 def attempt_combine(range1, range2):
     """See if range2 is at all contained in range1. Return a truncated range if so."""
 
-    if range1[0] > range2[0]:
+    if range1[0] < range2[0]:
        # Want range1 to always be earlier starting
        range1, range2 = range1, range2
     if range1[1] > range2[1]:
@@ -42,10 +42,31 @@ def attempt_combine(range1, range2):
 
 def clean_ranges(ranges):
     """Take a list of potentially overlapping date ranges (ascending sorted) and clean"""
-    cached = deque()
-    i in xrange(len(ranges), 1, -1):
-        out = attempt_combine(ranges[i - 2], ranges[i - 1])
-        cached.extend(out)
+    p1 = ranges.pop()
+    p2 = ranges.pop()
+    cached = []
+    print "\n-----------------------------------------------------------\n\n"
+    def do_iter(p1, p2): 
+        print "BEFORE COMBINE\np1={}\np2={}\n".format(p1, p2)
+        result = attempt_combine(p1, p2)
+        print "AFTER ATTEMPT\nresult={}\n".format(result)
+        if len(result) == 2:
+            cached.append(result[0])
+        print "CACHED after any append\n{}\n".format(cached)
+        p1 = p2
+        try:
+            p2 = ranges.pop()
+        except IndexError:
+            cached.append(p2)
+            p2 = None
+        return p1, p2
+    do_iter(p1, p2)
+    while p2:
+        p1, p2 = do_iter(p1, p2)
+    
+    # i in xrange(len(ranges), 1, -1):
+    #    out = attempt_combine(ranges[i - 2], ranges[i - 1])
+    #    cached.extend(out)
     return cached
 
 
@@ -65,10 +86,11 @@ if __name__ == "__main__":
         case = case.rstrip()
         args = case.split("; ")
         ranges = [datetime_range(arg) for arg in args]
+        # print "UNSORTED:\n{}".format(ranges)
         ranges.sort()
-        print "SORTED:\n{}".format(ranges)
+        # print "SORTED:\n{}".format(ranges)
         ranges = clean_ranges(ranges)
-        # print "RANGES:\n{}".format(ranges)
+        print "CLEANED:\n{}".format(ranges)
         # print "SUM:\n{}".format(sum_ranges(ranges))
         
     test_cases.close()
