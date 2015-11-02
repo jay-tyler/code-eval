@@ -1,0 +1,21 @@
+from __future__ import division
+import sys
+from collections import Counter
+
+
+def major_element(listin):
+    counts = Counter(listin)
+    predominant = counts.most_common(1)[0]
+    if predominant[1] >= len(listin) // 2:
+        return predominant[0]
+    else:
+        return None
+
+
+if __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for case in test_cases:
+        listin = case.split(',')
+        answer = major_element(listin)
+        print answer
+
