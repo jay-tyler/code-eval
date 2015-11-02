@@ -1,6 +1,8 @@
+from __future__ import division
 import sys
 import calendar
 import datetime
+from math import floor
 
 
 def datetime_range(strin):
@@ -22,43 +24,39 @@ def datetime_range(strin):
     return start, end
 
 
-def calculate_years(ranges):
-    def attempt_combine(range1, range2):
-        """See if range2 is at all contained in range1. Return a truncated range if so."""
+def attempt_combine(range1, range2):
+    """See if range2 is at all contained in range1. Return a truncated range if so."""
 
-        if range1[0] > range2[0]:
-            # Want range1 to always be earlier starting
-            range1, range2 = range1, range2
-        if range1[1] > range2[1]:
-            # Case of range2-end being inside range1; full overlap
-            return range1,
-        elif range1[1] > range2[0]:
-            # Case of range2-start being inside range1; partial overlap
-            return range1, (range1[1], range2[1])
-        else:
-            return range1, range2
+    if range1[0] > range2[0]:
+       # Want range1 to always be earlier starting
+       range1, range2 = range1, range2
+    if range1[1] > range2[1]:
+       # Case of range2-end being inside range1; full overlap
+       return range1,
+    elif range1[1] > range2[0]:
+       # Case of range2-start being inside range1; partial overlap
+       return range1, (range1[1], range2[1])
+    else:
+       return range1, range2
 
+
+def clean_ranges(ranges):
+    """Take a list of potentially overlapping date ranges (ascending sorted) and clean"""
     cached = []
-    j = 0
-    def combine_jth_range(j):
-        for i in xrange(j, len(ranges)):
-            try:
-                range1 = ranges[j]
-                range2 = ranges[i + 1]
-            except IndexError:
-                pass
-            else:
-                cached.extend(attempt_combine(range1, range2))
-    for j in xrange(len(ranges)):
-    # TODO: Fix. We need to tear down ranges and replace with truncated ranges. Aslo return a reference to last pointer
-    # or TODO: Maybe I should be sorting all ranges first. That might make things more straight forward.
-        try:
-            combine_jth_range(j)
-            ranges = cached
-            cached = []
-        except IndexError:
-            break
-    return ranges 
+    for i in xrange(len(ranges), 1, -1):
+        out = attempt_combine(ranges[i - 2], ranges[i - 1])
+        cached.extend(out)
+    return cached
+
+
+def sum_ranges(ranges):
+    """Return int years from datetime ranges"""
+    sum = 0
+    for range in ranges:
+        delta = range[1] - range[0]
+        sum += delta.days
+    return sum // 365
+
 
 if __name__ == "__main__":
     test_cases = open(sys.argv[1], 'r')
@@ -67,5 +65,10 @@ if __name__ == "__main__":
         case = case.rstrip()
         args = case.split("; ")
         ranges = [datetime_range(arg) for arg in args]
-        print calculate_years(ranges)
+        ranges.sort()
+        print "SORTED:\n{}".format(ranges)
+        ranges = clean_ranges(ranges)
+        # print "RANGES:\n{}".format(ranges)
+        # print "SUM:\n{}".format(sum_ranges(ranges))
+        
     test_cases.close()

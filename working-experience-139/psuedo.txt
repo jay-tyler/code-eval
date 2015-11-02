@@ -1,0 +1,4 @@
+1. Make datetime ranges
+2. Sort list of datetime ranges by ascending start datetime
+3. Use adjacent pointers to compare and combine datetime ranges; work from end of list inwards to avoid clusterfucking pointers
+4. Calculate int-rounded years from list of ranges
