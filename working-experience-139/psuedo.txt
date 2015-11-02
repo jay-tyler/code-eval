@@ -2,3 +2,15 @@
 2. Sort list of datetime ranges by ascending start datetime
 3. Use adjacent pointers to compare and combine datetime ranges; work from end of list inwards to avoid clusterfucking pointers
 4. Calculate int-rounded years from list of ranges
+
+
+clean_ranges steps
+1. pop from ranges
+2. pop again from ranges
+3. attempt to combine #1 #2
+5. if two ranges back, appendright #1 to cached
+6. if one range back, do nothing 
+7. morph identity for #2 to pointer for #1
+8. pop from ranges as new #2
+9. back to step #3
+

@@ -42,8 +42,8 @@ def attempt_combine(range1, range2):
 
 def clean_ranges(ranges):
     """Take a list of potentially overlapping date ranges (ascending sorted) and clean"""
-    cached = []
-    for i in xrange(len(ranges), 1, -1):
+    cached = deque()
+    i in xrange(len(ranges), 1, -1):
         out = attempt_combine(ranges[i - 2], ranges[i - 1])
         cached.extend(out)
     return cached
