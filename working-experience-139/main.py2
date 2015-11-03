@@ -46,7 +46,6 @@ def clean_ranges(ranges):
     p2 = ranges.pop()
     cached = []
     while ranges or p2:
-        # import pdb; pdb.set_trace()
         result = attempt_combine(p1, p2)
         if len(result) == 2:
             p1 = result[0]
@@ -60,10 +59,6 @@ def clean_ranges(ranges):
             cached.append(p1)
             p2 = None
             break
-
-    # i in xrange(len(ranges), 1, -1):
-    #    out = attempt_combine(ranges[i - 2], ranges[i - 1])
-    #    cached.extend(out)
     return cached
 
 
@@ -83,11 +78,8 @@ if __name__ == "__main__":
         case = case.rstrip()
         args = case.split("; ")
         ranges = [datetime_range(arg) for arg in args]
-        # print "UNSORTED:\n{}".format(ranges)
         ranges.sort()
-        # print "SORTED:\n{}".format(ranges)
         ranges = clean_ranges(ranges)
-        # print "CLEANED:\n{}".format(ranges)
-        print "SUM:\n{}".format(sum_ranges(ranges))
+        print sum_ranges(ranges)
         
     test_cases.close()
