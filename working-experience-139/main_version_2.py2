@@ -1,7 +1,7 @@
 import sys
 
 
-months = {
+monthabbrev = {
     "Jan": 1,
     "Feb": 2,
     "Mar": 3,
@@ -17,10 +17,41 @@ months = {
 }
 
 
+def gen_months(): 
+    months = [0 for item in xrange(12 * 30)]
+    return months
+
+def mark_range(strin, months):
+    """Take a string of format '%b %Y-%b %Y' and mark the months data structure to include these months"""
+    start, end = strin.split('-')
+    
+    start_mo, start_yr = start.split()
+    start_mo_n = monthabbrev[start_mo]
+    start_yr_n = (int(start_yr) - 1990) * 12
+    start_index = start_mo_n + start_yr_n
+
+    end_mo, end_yr = end.split()
+    end_mo_n = monthabbrev[end_mo]
+    end_yr_n = (int(end_yr) - 1990) * 12
+    end_index = end_mo_n + end_yr_n + 1
+
+    # print "_______\nstrin={}\nstart_index={}\nend_index={}".format(strin, start_index, end_index)
+
+    for i in xrange(start_index, end_index):
+        months[i] = 1
+        # print '\nmonths[{}]={}'.format(i, months[i])
+
+    return months
+
 if __name__ == "__main__":
     test_cases = open(sys.argv[1], 'r')
     for test in test_cases:
         test = test.strip()
         args = test.split('; ')
-        
-   test_cases.close()
+        months = gen_months()
+        for arg in args:
+            mark_range(arg, months)
+
+        # print "\nmonths={}\nyears={}".format(months.count(1), months.count(1)//12)
+        print months.count(1) // 12 
+    test_cases.close()
