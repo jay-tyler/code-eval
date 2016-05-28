@@ -1,0 +1,17 @@
+import sys
+
+def count_case(string):
+    string = string.strip()
+    lower = [char for char in string if char.islower()]
+    upper = [char for char in string if char.isupper()]
+    total_chars = float(len(string))
+    lower_perc = round((100 * len(lower) / total_chars), 2)
+    upper_perc = round((100 * len(upper) / total_chars), 2)
+
+    return "lowercase: {:.2f} uppercase: {:.2f}".format(lower_perc, upper_perc)
+
+if  __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        result = count_case(test)
+        print result

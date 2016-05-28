@@ -1,0 +1,22 @@
+import sys
+import operator
+
+def parse(input, directive):
+    input = input[:].split()
+    directive = [int(index) for index in directive[:].split()]
+    indices_available = { i + 1 for i, _ in enumerate(input) }
+    output = {}
+    for i, word in zip(directive, input):
+        output[i] = word
+        indices_available.remove(i)
+    output[indices_available.pop()] = input[-1]  # One last word without an index
+    as_list = sorted(output.items(), key=operator.itemgetter(0))
+    return ' '.join(word for _, word in as_list)
+    
+
+if  __name__ == "__main__":
+    test_cases = open(sys.argv[1], 'r')
+    for test in test_cases:
+        input, directive = test.split(';')
+        output = parse(input, directive)
+        print output
